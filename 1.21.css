@@ -14,7 +14,7 @@ body {
     overflow: hidden;
     background-color: #121212;
     position: relative;
-    background: #121212 url('https://raw.githubusercontent.com/Frugd/by/refs/heads/main/%D0%9D%D0%BE%D0%B2%D1%8B%D0%B9%20%D0%BF%D1%80%D0%BE%D0%B5%D0%BA%D1%82gggggg.gif') center center / cover no-repeat;
+    background: #121212 url('https://raw.githubusercontent.com/Frugd/by/refs/heads/main/fondanet.gif') center center / cover no-repeat;
 }
 
 .container {
@@ -50,7 +50,6 @@ body {
     background-color: #555;
 }
 
-/* Стиль для модального окна */
 .modal {
     position: fixed;
     top: 0;
