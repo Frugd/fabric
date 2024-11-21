@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>зачем ты сюда нажал?</title>
+    <link rel="stylesheet" href="1.21.css">
+</head>
+<body>
+    
+    <div id="passwordModal" class="modal">
+        <div class="modal-content">
+            <h2>Нет</h2>
+            <input type="password" id="passwordInput" placeholder="Нет">
+            <button onclick="checkPassword()">Подтвердить</button>
+            <p id="errorMessage" style="color: red; display: none;">Неверный нет. Попробуйте снова нет.</p>
+        </div>
+    </div>
+    
+    <div id="content" class="container" style="display: none;">
+        <div class="banner">
+            <img id="bannerImage" src="" alt="Не">
+        </div>
+        <a href="https://www.dropbox.com/scl/fi/ucgbnvznppcawgmz2d09j/1.21NEWfabric.zip?rlkey=ovgqklv63g12nvmjzjuegyv9x&st=07mmuz8r&dl=1" class="button">Моя сборка 1.21 (Автозагрузка)</a>
+        <a href="https://github.com/DIDIRUS4/AstralRinth/releases" class="button">Лаунчер, которым я пользуюсь</a>
+    </div>
+
+    <script>
+        function checkPassword() {
+            const password = document.getElementById("passwordInput").value;
+            const correctPassword = "111";
+            const errorMessage = document.getElementById("errorMessage");
+
+            if (password === correctPassword) {
+                document.getElementById("passwordModal").style.display = "none";
+                document.getElementById("content").style.display = "block";
+                setRandomBanner();
+            } else {
+                errorMessage.style.display = "block";
+            }
+        }
+
+        function setRandomBanner() {
+            const banners = [
+                "https://github.com/Frugd/by/blob/main/photo_2024-10-25_03-35-36.jpg?raw=true",
+                "https://github.com/Frugd/by/blob/main/photo_2024-10-25_20-17-46.jpg?raw=true",
+                "https://github.com/Frugd/by/blob/main/photo_2024-10-25_20-17-50.jpg?raw=true",
+                "https://github.com/Frugd/by/blob/main/photo_2024-10-25_20-17-52.jpg?raw=true"
+            ];
+
+            const randomIndex = Math.floor(Math.random() * banners.length);
+            const bannerImage = document.getElementById("bannerImage");
+            bannerImage.src = banners[randomIndex];
+        }
+    </script>
+</body>
+</html>
