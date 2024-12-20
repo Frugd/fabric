@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>зачем ты сюда нажал?</title>
+    <link rel="stylesheet" href="1211.css">
+</head>
+<body>
+    <div id="passwordModal" class="modal">
+        <div class="modal-content">
+            <h2>Введите пароль</h2>
+            <input type="password" id="passwordInput" placeholder="Введите пароль">
+            <button onclick="checkPassword()">Подтвердить</button>
+            <p id="errorMessage" style="color: red; display: none;">Неверный пароль. Попробуйте снова.</p>
+        </div>
+    </div>
+
+    <div id="content" class="container" style="display: none;">
+        <div class="banner">
+            <img id="bannerImage" src="" alt="Баннер">
+        </div>
+        <a href="https://www.dropbox.com/scl/fi/ucgbnvznppcawgmz2d09j/1.21NEWfabric.zip?rlkey=ovgqklv63g12nvmjzjuegyv9x&st=07mmuz8r&dl=1" class="button">Моя сборка 1.21 (Автозагрузка)</a>
+        <a href="https://github.com/DIDIRUS4/AstralRinth/releases/" class="button">Лаунчер, которым я пользуюсь</a>
+    </div>
+
+    <div id="alternateContent" class="container" style="display: none;">
+        <div class="banner">
+            <img id="interactiveImage" src="img/mousebg.png" alt="Интерактивное изображение">
+        </div>
+        <a href="https://frugd.github.io/nesmeshnoy/0" class="button">Не нажимай!!</a>
+        <a href="https://frugd.github.io/govnodav/otvechaynenaiyob" class="button">Shop ТeрбоЯрик(лучший Стафф)</a>
+    </div>
+
+    <script>
+        function checkPassword() {
+            const password = document.getElementById("passwordInput").value;
+            const correctPassword1 = "111";
+            const correctPassword2 = "222";
+            const errorMessage = document.getElementById("errorMessage");
+
+            if (password === correctPassword1) {
+                document.getElementById("passwordModal").style.display = "none";
+                document.getElementById("content").style.display = "block";
+                setRandomBanner();
+            } else if (password === correctPassword2) {
+                document.getElementById("passwordModal").style.display = "none";
+                document.getElementById("alternateContent").style.display = "block";
+                initInteractiveCat();
+            } else {
+                errorMessage.style.display = "block";
+            }
+        }
+
+        function setRandomBanner() {
+            const banners = [
+                "https://github.com/Frugd/by/blob/main/photo_2024-10-25_03-35-36.jpg?raw=true",
+                "https://github.com/Frugd/by/blob/main/photo_2024-10-25_20-17-46.jpg?raw=true",
+                "https://github.com/Frugd/by/blob/main/photo_2024-10-25_20-17-50.jpg?raw=true",
+                "https://github.com/Frugd/by/blob/main/photo_2024-10-25_20-17-52.jpg?raw=true",
+                "https://github.com/Frugd/by/blob/main/%5B%ED%8F%AC%EC%BC%93%EB%AA%AC%5D%20%EB%8B%98%ED%94%BC%EC%95%84%20%EC%B9%B4%ED%8E%98%200-56%20screenshot.png?raw=true",
+                "https://github.com/Frugd/by/blob/main/hftrg.gif?raw=true"
+            ];
+
+            const randomIndex = Math.floor(Math.random() * banners.length);
+            const bannerImage = document.getElementById("bannerImage");
+            bannerImage.src = banners[randomIndex];
+        }
+
+        function initInteractiveCat() {
+            const interactiveImage = document.getElementById("interactiveImage");
+            const cursor = document.createElement("div");
+            cursor.classList.add("cursor");
+            document.body.appendChild(cursor);
+
+            document.addEventListener("mousemove", (event) => {
+                cursor.style.left = event.pageX + "px";
+                cursor.style.top = event.pageY + "px";
+            });
+
+            document.addEventListener("keydown", (event) => {
+                const hand = document.createElement("img");
+                hand.src = event.key === "W" ? "img/up.png" : "img/left.png";
+                hand.style.position = "absolute";
+                hand.style.left = cursor.style.left;
+                hand.style.top = cursor.style.top;
+                document.body.appendChild(hand);
+
+                setTimeout(() => hand.remove(), 500);
+            });
+
+            document.addEventListener("keyup", (event) => {
+                const hand = document.createElement("img");
+                hand.src = event.key === "S" ? "img/right.png" : "img/left.png";
+                hand.style.position = "absolute";
+                hand.style.left = cursor.style.left;
+                hand.style.top = cursor.style.top;
+                document.body.appendChild(hand);
+
+                setTimeout(() => hand.remove(), 500);
+            });
+        }
+    </script>
+</body>
+</html>

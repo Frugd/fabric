@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Интерактивный кот</title>
+    <link rel="stylesheet" href="12111.css">
+</head>
+<body>
+    <div id="passwordModal" class="modal">
+        <div class="modal-content">
+            <h2>Введите пароль</h2>
+            <input type="password" id="passwordInput" placeholder="Введите пароль">
+            <button onclick="checkPassword()">Подтвердить</button>
+            <p id="errorMessage" style="color: red; display: none;">Неверный пароль. Попробуйте снова.</p>
+        </div>
+    </div>
+
+    <div id="content" class="container" style="display: none;">
+        <div class="banner">
+            <img id="bannerImage" src="" alt="Баннер">
+        </div>
+        <a href="https://www.dropbox.com/scl/fi/ucgbnvznppcawgmz2d09j/1.21NEWfabric.zip?rlkey=ovgqklv63g12nvmjzjuegyv9x&st=07mmuz8r&dl=1" class="button">Моя сборка 1.21 (Автозагрузка)</a>
+        <a href="https://github.com/DIDIRUS4/AstralRinth/releases/" class="button">Лаунчер, которым я пользуюсь</a>
+    </div>
+
+    <div id="alternateContent" class="interactive-container" style="display: none;">
+        <div class="interactive-area">
+            <img src="img/mousebg.png" id="background" alt="Интерактивный фон">
+            <img src="img/mouse.png" id="mouse" alt="Мышка">
+            <img src="img/up.png" id="hand" alt="Рука">
+        </div>
+    </div>
+
+    <script>
+        function checkPassword() {
+            const password = document.getElementById("passwordInput").value;
+            const correctPassword1 = "111";
+            const correctPassword2 = "222";
+            const errorMessage = document.getElementById("errorMessage");
+
+            if (password === correctPassword1) {
+                document.getElementById("passwordModal").style.display = "none";
+                document.getElementById("content").style.display = "block";
+                setRandomBanner();
+            } else if (password === correctPassword2) {
+                document.getElementById("passwordModal").style.display = "none";
+                document.getElementById("alternateContent").style.display = "block";
+                initInteractiveCat();
+            } else {
+                errorMessage.style.display = "block";
+            }
+        }
+
+        function setRandomBanner() {
+            const banners = [
+                "https://github.com/Frugd/by/blob/main/photo_2024-10-25_03-35-36.jpg?raw=true",
+                "https://github.com/Frugd/by/blob/main/photo_2024-10-25_20-17-46.jpg?raw=true",
+                "https://github.com/Frugd/by/blob/main/photo_2024-10-25_20-17-50.jpg?raw=true",
+                "https://github.com/Frugd/by/blob/main/photo_2024-10-25_20-17-52.jpg?raw=true",
+                "https://github.com/Frugd/by/blob/main/%5B%ED%8F%AC%EC%BC%93%EB%AA%AC%5D%20%EB%8B%98%ED%94%BC%EC%95%84%20%EC%B9%B4%ED%8E%98%200-56%20screenshot.png?raw=true",
+                "https://github.com/Frugd/by/blob/main/hftrg.gif?raw=true"
+            ];
+
+            const randomIndex = Math.floor(Math.random() * banners.length);
+            const bannerImage = document.getElementById("bannerImage");
+            bannerImage.src = banners[randomIndex];
+        }
+
+        function initInteractiveCat() {
+            const mouse = document.getElementById("mouse");
+            const hand = document.getElementById("hand");
+
+            // Центрирование мышки и руки на фоне
+            const bg = document.getElementById("background");
+            const bgRect = bg.getBoundingClientRect();
+            mouse.style.left = `${bgRect.left + bgRect.width / 2 - 25}px`;
+            mouse.style.top = `${bgRect.top + bgRect.height / 2 - 25}px`;
+            hand.style.left = `${bgRect.left + bgRect.width / 2 - 30}px`;
+            hand.style.top = `${bgRect.top}px`;
+
+            // Движение мыши
+            document.addEventListener("mousemove", (event) => {
+                const x = event.pageX - bgRect.left;
+                const y = event.pageY - bgRect.top;
+
+                if (x >= 0 && x <= bgRect.width && y >= 0 && y <= bgRect.height) {
+                    mouse.style.left = `${x - 25}px`;
+                    mouse.style.top = `${y - 25}px`;
+
+                    const handX = x - 10; // Слегка правее от мышки
+                    const handY = y - 50; // Чуть выше мышки
+                    hand.style.left = `${handX}px`;
+                    hand.style.top = `${handY}px`;
+                }
+            });
+
+            // Нажатие на клавиши
+            document.addEventListener("keydown", (event) => {
+                if (event.key === "w" || event.key === "W") {
+                    hand.src = "img/left.png";
+                }
+            });
+
+            document.addEventListener("keyup", (event) => {
+                if (event.key === "w" || event.key === "W") {
+                    hand.src = "img/up.png";
+                }
+            });
+        }
+    </script>
+</body>
+</html>
